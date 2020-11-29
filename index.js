@@ -22,10 +22,16 @@ const tiradaDado = (num, dado) => {
   for (var i = 0; i < (num != "" ? num : 1); i++) {
     results.push(Math.floor(Math.random() * dado + 1));
   }
+  var res = `*Tirada ${num}d${dado}:* `;
 
-  return `*Tirada ${num}d${dado}*: ${results.join(" + ")} **${
-    num != "" ? "= " + results.reduce((acc, value) => (acc += value)) : ""
-  }** `;
+  if (num == "") {
+    res += ` **${results[0]}**`;
+  } else {
+    res += `${results.join(" + ")} = **${results.reduce(
+      (acc, value) => (acc += value)
+    )}**`;
+  }
+  return res;
 };
 
 var enviarTirada = (msg, tirada) => {
